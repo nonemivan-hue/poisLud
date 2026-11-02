@@ -14,7 +14,6 @@ function App() {
   const [middleName, setMiddleName] = useState('');
   const [searchResults, setSearchResults] = useState<SearchLink[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
-  const [showInstructions, setShowInstructions] = useState(false);
 
   const generateSearchLinks = (): SearchLink[] => {
     const fullName = `${lastName} ${firstName} ${middleName}`.trim();
@@ -204,23 +203,14 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Header */}
       <header className="border-b border-white/10 backdrop-blur-sm bg-white/5">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-              <i className="fas fa-user-secret text-white text-lg"></i>
-            </div>
-            <div>
-              <h1 className="text-white font-bold text-xl">OSINT Поиск</h1>
-              <p className="text-white/50 text-xs">Поиск информации по ФИО</p>
-            </div>
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+            <i className="fas fa-user-secret text-white text-lg"></i>
           </div>
-          <button
-            onClick={() => setShowInstructions(true)}
-            className="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-white text-sm font-medium transition-all duration-200 flex items-center gap-2"
-          >
-            <i className="fas fa-rocket"></i>
-            Как запустить
-          </button>
+          <div>
+            <h1 className="text-white font-bold text-xl">OSINT Поиск</h1>
+            <p className="text-white/50 text-xs">Поиск информации по ФИО</p>
+          </div>
         </div>
       </header>
 
@@ -400,211 +390,6 @@ function App() {
           </p>
         </div>
       </footer>
-
-      {/* Instructions Modal */}
-      {showInstructions && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-slate-900 border border-white/10 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-            {/* Modal Header */}
-            <div className="sticky top-0 bg-slate-900/95 backdrop-blur-sm border-b border-white/10 p-6 flex items-center justify-between">
-              <h2 className="text-white text-2xl font-bold flex items-center gap-2">
-                <i className="fas fa-rocket text-purple-400"></i>
-                Инструкция по запуску
-              </h2>
-              <button
-                onClick={() => setShowInstructions(false)}
-                className="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/60 hover:text-white transition-all"
-              >
-                <i className="fas fa-times"></i>
-              </button>
-            </div>
-
-            {/* Modal Content */}
-            <div className="p-6 space-y-6">
-              {/* Quick Start */}
-              <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-xl p-5">
-                <h3 className="text-purple-400 font-semibold text-lg mb-3 flex items-center gap-2">
-                  <i className="fas fa-bolt"></i>
-                  Быстрый старт
-                </h3>
-                <p className="text-white/70 text-sm leading-relaxed">
-                  Это веб-приложение на React + Vite + Tailwind CSS. Для запуска вам понадобится Node.js версии 18 или выше.
-                </p>
-              </div>
-
-              {/* Prerequisites */}
-              <div>
-                <h3 className="text-white font-semibold text-lg mb-3 flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400">1</span>
-                  Требования
-                </h3>
-                <div className="bg-white/5 border border-white/10 rounded-xl p-4 ml-10">
-                  <ul className="text-white/70 text-sm space-y-2">
-                    <li className="flex items-start gap-2">
-                      <i className="fas fa-check text-green-400 mt-0.5"></i>
-                      <span><strong className="text-white">Node.js</strong> версии 18+ (<a href="https://nodejs.org" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">скачать</a>)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <i className="fas fa-check text-green-400 mt-0.5"></i>
-                      <span><strong className="text-white">npm</strong> (устанавливается вместе с Node.js)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <i className="fas fa-check text-green-400 mt-0.5"></i>
-                      <span><strong className="text-white">Git</strong> (опционально, для клонирования репозитория)</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Installation */}
-              <div>
-                <h3 className="text-white font-semibold text-lg mb-3 flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-lg bg-green-500/20 flex items-center justify-center text-green-400">2</span>
-                  Установка зависимостей
-                </h3>
-                <div className="bg-white/5 border border-white/10 rounded-xl p-4 ml-10">
-                  <p className="text-white/70 text-sm mb-3">Откройте терминал в папке проекта и выполните:</p>
-                  <div className="bg-black/50 rounded-lg p-3 font-mono text-sm">
-                    <code className="text-green-400">npm install</code>
-                  </div>
-                  <p className="text-white/50 text-xs mt-2">
-                    Эта команда установит все необходимые зависимости из package.json
-                  </p>
-                </div>
-              </div>
-
-              {/* Development */}
-              <div>
-                <h3 className="text-white font-semibold text-lg mb-3 flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-lg bg-yellow-500/20 flex items-center justify-center text-yellow-400">3</span>
-                  Запуск в режиме разработки
-                </h3>
-                <div className="bg-white/5 border border-white/10 rounded-xl p-4 ml-10">
-                  <p className="text-white/70 text-sm mb-3">Для запуска локального сервера разработки:</p>
-                  <div className="bg-black/50 rounded-lg p-3 font-mono text-sm">
-                    <code className="text-yellow-400">npm run dev</code>
-                  </div>
-                  <p className="text-white/50 text-xs mt-2">
-                    Приложение откроется по адресу <code className="text-purple-400">http://localhost:5173</code>
-                  </p>
-                  <p className="text-white/50 text-xs mt-1">
-                    Сервер автоматически перезагружается при изменении файлов
-                  </p>
-                </div>
-              </div>
-
-              {/* Production Build */}
-              <div>
-                <h3 className="text-white font-semibold text-lg mb-3 flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-lg bg-red-500/20 flex items-center justify-center text-red-400">4</span>
-                  Сборка для продакшена
-                </h3>
-                <div className="bg-white/5 border border-white/10 rounded-xl p-4 ml-10">
-                  <p className="text-white/70 text-sm mb-3">Для создания оптимизированной production-версии:</p>
-                  <div className="bg-black/50 rounded-lg p-3 font-mono text-sm space-y-1">
-                    <code className="text-red-400">npm run build</code>
-                  </div>
-                  <p className="text-white/50 text-xs mt-2">
-                    Готовые файлы появятся в папке <code className="text-purple-400">dist/</code>
-                  </p>
-                </div>
-              </div>
-
-              {/* Preview Production */}
-              <div>
-                <h3 className="text-white font-semibold text-lg mb-3 flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center text-indigo-400">5</span>
-                  Предпросмотр production-сборки
-                </h3>
-                <div className="bg-white/5 border border-white/10 rounded-xl p-4 ml-10">
-                  <p className="text-white/70 text-sm mb-3">После сборки можно запустить локальный preview-сервер:</p>
-                  <div className="bg-black/50 rounded-lg p-3 font-mono text-sm">
-                    <code className="text-indigo-400">npm run preview</code>
-                  </div>
-                  <p className="text-white/50 text-xs mt-2">
-                    Это запустит статический сервер для проверки production-сборки
-                  </p>
-                </div>
-              </div>
-
-              {/* Project Structure */}
-              <div>
-                <h3 className="text-white font-semibold text-lg mb-3 flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-lg bg-cyan-500/20 flex items-center justify-center text-cyan-400">6</span>
-                  Структура проекта
-                </h3>
-                <div className="bg-white/5 border border-white/10 rounded-xl p-4 ml-10">
-                  <div className="bg-black/50 rounded-lg p-3 font-mono text-xs text-white/70 space-y-0.5">
-                    <div>📁 <span className="text-white">src/</span></div>
-                    <div className="ml-4">├── 📄 App.tsx <span className="text-white/40">← Главный компонент</span></div>
-                    <div className="ml-4">├── 📄 main.tsx <span className="text-white/40">← Точка входа</span></div>
-                    <div className="ml-4">└── 📄 index.css <span className="text-white/40">← Глобальные стили</span></div>
-                    <div>📁 <span className="text-white">public/</span> <span className="text-white/40">← Статические файлы</span></div>
-                    <div>📄 <span className="text-white">index.html</span> <span className="text-white/40">← HTML шаблон</span></div>
-                    <div>📄 <span className="text-white">package.json</span> <span className="text-white/40">← Зависимости</span></div>
-                    <div>📄 <span className="text-white">vite.config.ts</span> <span className="text-white/40">← Конфигурация Vite</span></div>
-                    <div>📄 <span className="text-white">tailwind.config.js</span> <span className="text-white/40">← Конфигурация Tailwind</span></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Troubleshooting */}
-              <div>
-                <h3 className="text-white font-semibold text-lg mb-3 flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-lg bg-orange-500/20 flex items-center justify-center text-orange-400">7</span>
-                  Решение проблем
-                </h3>
-                <div className="bg-white/5 border border-white/10 rounded-xl p-4 ml-10 space-y-3">
-                  <div>
-                    <p className="text-white/80 text-sm font-medium">Ошибка: "npm not found"</p>
-                    <p className="text-white/50 text-xs mt-1">Установите Node.js с официального сайта nodejs.org</p>
-                  </div>
-                  <div className="border-t border-white/10 pt-3">
-                    <p className="text-white/80 text-sm font-medium">Ошибка при npm install</p>
-                    <p className="text-white/50 text-xs mt-1">Удалите папку node_modules и package-lock.json, затем повторите npm install</p>
-                  </div>
-                  <div className="border-t border-white/10 pt-3">
-                    <p className="text-white/80 text-sm font-medium">Порт 5173 занят</p>
-                    <p className="text-white/50 text-xs mt-1">Vite автоматически предложит другой порт или используйте: npm run dev -- --port 3000</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Additional Commands */}
-              <div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20 rounded-xl p-5">
-                <h3 className="text-blue-400 font-semibold text-lg mb-3 flex items-center gap-2">
-                  <i className="fas fa-terminal"></i>
-                  Полезные команды
-                </h3>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-start gap-3">
-                    <code className="text-green-400 font-mono bg-black/30 px-2 py-1 rounded text-xs whitespace-nowrap">npm run lint</code>
-                    <span className="text-white/60">Проверка кода на ошибки</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <code className="text-green-400 font-mono bg-black/30 px-2 py-1 rounded text-xs whitespace-nowrap">npm run format</code>
-                    <span className="text-white/60">Форматирование кода</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <code className="text-green-400 font-mono bg-black/30 px-2 py-1 rounded text-xs whitespace-nowrap">npm run test</code>
-                    <span className="text-white/60">Запуск тестов (если настроены)</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Modal Footer */}
-            <div className="sticky bottom-0 bg-slate-900/95 backdrop-blur-sm border-t border-white/10 p-6">
-              <button
-                onClick={() => setShowInstructions(false)}
-                className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold rounded-xl shadow-lg shadow-purple-500/25 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
-              >
-                Понятно, закрыть
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
